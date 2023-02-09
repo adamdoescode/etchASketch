@@ -3,12 +3,14 @@
 
 const drawingBoardDiv = document.querySelector('.drawingBoard')
 
-function makeGrid() {
-    for (let row = 0; row < 16; row++) {
+function makeGrid(rowMax,colMax) {
+    //remove existing grid if it exists
+    drawingBoardDiv.innerHTML = '';
+    for (let row = 0; row < rowMax; row++) {
         // make a row div container
         newRow = document.createElement('div')
         newRow.classList.add('newRow')
-        for (let col = 0; col < 16; col++) {
+        for (let col = 0; col < colMax; col++) {
             // make grid
             newDiv = document.createElement('div')
             newDiv.classList.add('drawDiv')
@@ -32,9 +34,11 @@ function makeGrid() {
 }
 
 // run makeGrid at startup
-makeGrid()
+makeGrid(16,16)
 
-drawingBoardDiv.addEventListener('mouseenter', (event) => {
-    event.target.style.color = 'purple';
-    setTimeout(() => {event.target.style.color = 'aquamarine'}, 500)
+const gridChangeButton = document.querySelector('.changeGrid')
+gridChangeButton.addEventListener('click', (event) => {
+    rowNumber = document.getElementById('rowNumber').value
+    colNumber = document.getElementById('colNumber').value
+    makeGrid(rowNumber,colNumber)
 })
